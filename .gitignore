@@ -12,11 +12,6 @@
 # Local prediction/log artifacts.
 /results/
 
-# Generated MSA files and the machine-specific example CSV.
-*.a3m
-/data/example/msa/
-/data/example/acvr2b.csv
-
 # Old/internal submission helpers and local runtime artifacts.
 /scripts/export_affinity_ckpt.py
 *.log

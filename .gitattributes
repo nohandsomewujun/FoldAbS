@@ -1,1 +1,2 @@
 checkpoints/*.pt filter=lfs diff=lfs merge=lfs -text
+data/example/msa/**/*.a3m filter=lfs diff=lfs merge=lfs -text
