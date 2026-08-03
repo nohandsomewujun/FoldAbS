@@ -1,0 +1,26 @@
+# Internal TAIJI submission configuration and runtime outputs.
+/taiji/
+/taiji_outputs/
+
+# Python caches and local runtime files.
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local prediction/log artifacts.
+/results/
+
+# Generated MSA files and the machine-specific example CSV.
+*.a3m
+/data/example/msa/
+/data/example/acvr2b.csv
+
+# Old/internal submission helpers and local runtime artifacts.
+/scripts/export_affinity_ckpt.py
+*.log
+*.out
+*.tmp
+*.swp
+*.bak

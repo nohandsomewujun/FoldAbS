@@ -1,0 +1,3 @@
+data:
+  csv_path: ./data/developability/test.csv
+  task: aggregation

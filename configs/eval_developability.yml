@@ -1,0 +1,21 @@
+model:
+  model_name: protenix_base_default_v1.0.0
+  checkpoint_path: ./checkpoints/protenix_base_default_v1.0.0.pt
+
+esm_module:
+  model_name: esm2_t33_650M_UR50D
+  model_dir: ./checkpoints/esm2_t33_650M_UR50D.pt
+  freeze_esm: true
+
+developability_module:
+  mlp:
+    hidden_dim: 512
+    num_layers: 3
+    dropout: 0.1
+  pairwise_conditioning:
+    num_dist_bins: 64
+    num_transitions: 2
+    transition_expansion_factor: 2
+  pairformer:
+    n_blocks: 1
+    dropout: 0.1

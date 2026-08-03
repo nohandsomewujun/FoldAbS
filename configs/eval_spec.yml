@@ -1,0 +1,16 @@
+model:
+  model_name: protenix_base_default_v1.0.0
+  checkpoint_path: ./checkpoints/protenix_base_default_v1.0.0.pt   # Protenix backbone weights
+
+affinity_module:
+  num_dist_bins: 64
+  max_dist: 22.0
+  reduce_samples: mean      
+  b_pae: 64                 
+  N_sample_mini_rollout: 32
+  N_step_mini_rollout: 200  
+
+  pairformer:
+    n_blocks: 4
+    dropout: 0.0
+    blocks_per_ckpt: null
