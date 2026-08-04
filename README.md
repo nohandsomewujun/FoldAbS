@@ -11,6 +11,13 @@ projects and record the exact versions/commits used for a reproducible run.
 
 ## Requirements
 
+After cloning, fetch the Git LFS objects before running inference:
+
+```bash
+git lfs install
+git lfs pull
+```
+
 - A pinned Protenix v1 checkout, available as `FoldAbS/Protenix/` (or exposed
   through `PYTHONPATH`), including its `configs` and `protenix` packages.
 - PyTorch with a CUDA-capable GPU for practical inference.
@@ -30,6 +37,11 @@ The paths to the backbone and ESM weights are configured in:
 
 Relative paths are resolved against the checkout, while absolute paths may be
 used for externally mounted weights.
+
+The released repository does not contain the backbone or ESM weights.  Before
+running a command, edit the relevant YAML file so `checkpoint_path` and (for
+developability) `esm_module.model_dir` point to downloaded files, or place the
+files at the relative paths shown in the YAML files.
 
 ## Checkpoints
 
@@ -99,9 +111,12 @@ Specificity:
 python scripts/eval_spec.py \
   --config configs/eval_spec.yml \
   --spec_ckpt checkpoints/spec_head.pt \
-  --csv_path data/example/input_with_msa.csv \
+  --csv_path data/example/acvr2b.csv \
   --out_csv results/specificity_predictions.csv
 ```
+
+The checked-in ACVR2B CSV already contains portable paths to the checked-in
+example MSAs, so it can be used directly after the backbone path is configured.
 
 Affinity:
 
