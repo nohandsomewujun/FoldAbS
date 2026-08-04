@@ -1,0 +1,14 @@
+name: foldabs-inference
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - numpy>=1.24
+      - pandas>=2.0
+      - PyYAML>=6.0
+      - scipy>=1.10
+
+# Install PyTorch and Protenix according to the official Protenix environment
+# and CUDA instructions: https://github.com/bytedance/Protenix

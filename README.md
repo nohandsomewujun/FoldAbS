@@ -6,8 +6,10 @@ task-specific heads for antibody--antigen specificity, continuous affinity,
 and developability.
 
 The repository intentionally does **not** include the Protenix backbone or
-the ESM-2 650M weights.  Obtain those files from their respective upstream
-projects and record the exact versions/commits used for a reproducible run.
+the ESM-2 650M weights.  Install Protenix from the
+[official Protenix repository](https://github.com/bytedance/Protenix), use its
+v1 model implementation, and obtain the ESM-2 weights from the upstream ESM
+release.
 
 ## Requirements
 
@@ -38,10 +40,9 @@ The paths to the backbone and ESM weights are configured in:
 Relative paths are resolved against the checkout, while absolute paths may be
 used for externally mounted weights.
 
-The released repository does not contain the backbone or ESM weights.  Before
-running a command, edit the relevant YAML file so `checkpoint_path` and (for
-developability) `esm_module.model_dir` point to downloaded files, or place the
-files at the relative paths shown in the YAML files.
+The released repository does not contain the backbone or ESM weights.  Edit
+the relevant YAML file so `checkpoint_path` and (for developability)
+`esm_module.model_dir` point to the downloaded files.
 
 ## Checkpoints
 
@@ -84,21 +85,11 @@ sample_id,task,heavy,light,heavy_msa_path,light_msa_path
 `target` is optional.  An `msa_id` column alone is not sufficient; it must be
 resolved to an actual `.a3m` path first.
 
-For datasets that already have an index mapping `prot_id` to MSA hashes, the
-portable helper below copies the files and writes the three path columns:
-
-```bash
-python data/example/add_msa_paths.py \
-  --target-csv input.csv \
-  --index-csv msa_index.csv \
-  --source-msa-dir /path/to/msa.files \
-  --output-msa-dir /path/to/output/msa \
-  --output-csv input_with_msa.csv \
-  --path-style absolute
-```
-
-The helper has no hard-coded machine paths.  If no hash index is available,
-create the same columns directly after your ColabFold search.
+The checked-in ACVR2B example is already prepared with portable MSA paths.
+For another dataset, use `python data/example/add_msa_paths.py --help` to
+attach MSA files from a hash index, or create the required path columns
+directly after your ColabFold search.  The helper has no hard-coded machine
+paths.
 
 ## Inference
 
@@ -159,7 +150,7 @@ Ceph mount commands, or internal filesystem paths to a public checkout.
 
 ## License and data
 
-Before publishing, add a project license and verify that all redistributed
-sequences, labels, MSA files, and upstream model weights permit
-redistribution.  The benchmark data and upstream Protenix/ESM components may
-have separate licenses.
+FoldAbS code and released task heads are provided under the MIT License in
+`LICENSE`.  Protenix is an external dependency with its own Apache-2.0
+license.  Verify that redistributed benchmark sequences, labels, MSA files,
+and external model weights are covered by their respective licenses.
