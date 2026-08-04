@@ -85,11 +85,36 @@ sample_id,task,heavy,light,heavy_msa_path,light_msa_path
 `target` is optional.  An `msa_id` column alone is not sufficient; it must be
 resolved to an actual `.a3m` path first.
 
-The checked-in ACVR2B example is already prepared with portable MSA paths.
-For another dataset, use `python data/example/add_msa_paths.py --help` to
-attach MSA files from a hash index, or create the required path columns
-directly after your ColabFold search.  The helper has no hard-coded machine
-paths.
+The checked-in `data/example/acvr2b.csv` is already prepared with portable MSA
+paths.  To reproduce the attach step for another CSV, first let your
+ColabFold/MMseqs2 preprocessing produce an index with these columns:
+
+```text
+prot_id,h_msa_hash,l_msa_hash,ag_msa_hash
+```
+
+and a directory containing `msa.files.H/`, `msa.files.L/`, and
+`msa.files.ag/`.  From the repository root, run:
+
+```bash
+RAW_CSV=data/example/acvr2b_sequences.csv
+MSA_INDEX=/your/colabfold/output/msa_index.csv
+COLABFOLD_MSA_ROOT=/your/colabfold/output
+
+python data/example/add_msa_paths.py \
+  --target-csv "$RAW_CSV" \
+  --index-csv "$MSA_INDEX" \
+  --source-msa-dir "$COLABFOLD_MSA_ROOT" \
+  --output-msa-dir data/example/msa \
+  --output-csv data/example/acvr2b.csv \
+  --path-style relative \
+  --relative-to .
+```
+
+This copies the referenced `.a3m` files into `data/example/msa/` and adds
+`heavy_msa_path`, `light_msa_path`, and `antigen_msa_path` to the output CSV.
+The helper has no hard-coded machine paths; replace only the three shell
+variables with the locations produced by your MSA search.
 
 ## Inference
 
