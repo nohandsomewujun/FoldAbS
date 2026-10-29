@@ -167,15 +167,3 @@ All three entry points support `torchrun` DDP.  For exact reproduction, keep
 the Protenix commit, backbone/ESM checkpoint versions, YAML configuration,
 MSA files, seed, and rollout overrides fixed.
 
-## Repository hygiene
-
-TAIJI submission files, runtime logs, generated predictions, Python caches,
-and generated MSA files are ignored by `.gitignore`.  Do not add credentials,
-Ceph mount commands, or internal filesystem paths to a public checkout.
-
-## License and data
-
-FoldAbS code and released task heads are provided under the MIT License in
-`LICENSE`.  Protenix is an external dependency with its own Apache-2.0
-license.  Verify that redistributed benchmark sequences, labels, MSA files,
-and external model weights are covered by their respective licenses.
